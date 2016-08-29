@@ -1,0 +1,13 @@
+<table align="center" class="year">
+<tr>
+  <th ng-click="sortBy('year')">Year  <span class="sortorder" ng-show="propertyName === 'year'" ng-class="{reverse: reverse}"></span></th>
+  <th ng-click="sortBy('under500')">under500 <span class="sortorder" ng-show="propertyName === 'under500'" ng-class="{reverse: reverse}"></span></th>
+  <th ng-click="sortBy('over500')">over500 <span class="sortorder" ng-show="propertyName === 'over500'" ng-class="{reverse: reverse}"></span></th>
+  <th> operation</th></tr>
+<tr ng-repeat="y in year| orderBy:orderProp  | orderBy:propertyName:reverse | limitTo: pageSize:begin">
+  <td>{{ y.year }}</td>
+  <td>{{ y.under500 }}</td>
+  <td>{{ y.over500 }}</td>
+  <td><input type="submit" value="delete" ng-click="remove(y.year)"></td>
+</tr>
+</table>

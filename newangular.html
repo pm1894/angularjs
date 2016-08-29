@@ -1,0 +1,60 @@
+  <!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script src="crime.js"></script>
+<!-- <script src="mytable.html"></script> -->
+<style>
+.sortorder:after {
+  content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+}
+.sortorder.reverse:after {
+  content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+}
+table td{padding:15px;border:2px solid #DDD;}
+
+</style>
+</head>
+<body>
+<div  ng-controller="crimeCtrl">
+
+        <p>
+       Sort by:
+       <select ng-model="orderProp">
+         <option value="year">Year</option>
+         <option value="under500">under500</option>
+         <option value="over500">over500</option>
+       </select>
+     </p>
+     <p>
+       Search: <input ng-model="num" />
+       <button ng-click="search_fn(num,orderProp)">search</button>
+
+     </p>
+      <my-table></my-table>
+
+<div>
+<button  ng-repeat="y in pages " ng-click="buttonCount(y)">{{y}}</button>
+</div>
+
+
+<form name="myForm" >
+  <table align="center">
+    <tr><th colspan="2">Add Crime Data</th></tr>
+    <tr><td>Year: </td><td><input type="number" name="year" ng-model="cyear" required />
+     <span ng-show="myForm.year.$touched && myForm.year.$invalid">*The year is required.</span></td></tr>
+      <tr><td>Below 500: </td><td><input type="number" name="under500"
+        ng-model="aunder500" required/>
+         <span ng-show="myForm.under500.$touched && myForm.under500.$invalid">*The under500 value is required.</span></td></tr>
+        <tr><td>Above 500: </td><td><input type="number" name="over500" ng-model="aover500" required/>
+          <span ng-show="myForm.over500.$touched && myForm.over500.$invalid">*The over500 value is required.</span></td></tr>
+          <tr><td><button type="button"  ng-click="add()"/>Add Data</button>
+            <button type="button"  ng-click="reset()"/>Reset</button></td>
+          </tr>
+        </table>
+      </form>
+</div>
+
+</body>
+</html>
